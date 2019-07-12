@@ -1,0 +1,9 @@
+{
+  "name": "ngx-wiz-sso",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "vanilla-wiz-sso": "git+https://github.com/wizsolucoes/vanilla-wiz-sso.git",
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  }
+}
