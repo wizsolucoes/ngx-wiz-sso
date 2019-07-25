@@ -3,5 +3,8 @@
   "dest": "../../dist/ngx-wiz-sso",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "vanilla-wiz-sso"
+  ]
 }

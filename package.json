@@ -1,9 +1,18 @@
 {
-  "name": "ngx-wiz-sso",
+  "name": "@wizsolucoes/ngx-wiz-sso",
   "version": "0.0.1",
+  "description": "Toolkit para conexão simplificada ao SSO.",
+  "author": "Givailson de Souza Neves",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wizsolucoes/ngx-wiz-sso"
+  },  
+  "dependencies": {
+    "vanilla-wiz-sso": "@wizsolucoes/vanilla-wiz-sso"
+  },
   "peerDependencies": {
-    "vanilla-wiz-sso": "git+https://github.com/wizsolucoes/vanilla-wiz-sso.git",
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",    
+    "@angular/compiler": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   }
 }

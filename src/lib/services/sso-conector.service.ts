@@ -26,16 +26,16 @@ export class SSOConectorService {
   }
 
   public loginWithCredentials(_credentials: { email: string, password: string }): Observable<Token> {
-    return from(this.sso.loginWithCredentials(_credentials.email, _credentials.password));
+    return <Observable<Token>> from(this.sso.loginWithCredentials(_credentials.email, _credentials.password));
   }
 
   public refreshToken(): Observable<Token> {
-    return from(this.sso.refreshToken());
+    return <Observable<Token>> from(this.sso.refreshToken());
   }
 
   public checkLogged(): Observable<Token> {
     
-    return from(this.sso.isLogged());
+    return <Observable<Token>> from(this.sso.isLogged());
   }
 
 }

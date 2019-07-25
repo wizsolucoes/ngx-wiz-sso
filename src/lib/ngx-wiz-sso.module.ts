@@ -2,7 +2,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { _SSOConfig, SSOConfig } from './models/sso-config';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SSOConectorService, AuthGuard, init_app } from '../public_api';
-import { HTTP_INTERCEPTORS } from '@angular/common/http/src/interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpAuthInterceptor } from './interceptors/http-auth-interceptor';
 
 @NgModule({})
