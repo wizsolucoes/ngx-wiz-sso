@@ -1,6 +1,6 @@
 {
   "name": "@wizsolucoes/ngx-wiz-sso",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Toolkit para conexão simplificada ao SSO.",
   "author": "Givailson de Souza Neves",
   "repository": {
