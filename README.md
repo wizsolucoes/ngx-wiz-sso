@@ -10,7 +10,7 @@ Modulo feito para [Angular 4+](https://angular.io/) que têm por objetivo facili
 ## Recursos do módulo
 
 * Renovação automática(configurável) e silenciosa do token do usuário.
-* Injeção de Token automática nas requisições http, [mapeadas](#-configuracao-do-modulo) na configuração.
+* Injeção de Token automática nas requisições http, [mapeadas](#configuracao-do-modulo) na configuração.
 * Classe [Service Angular](https://angular.io/tutorial/toh-pt4) pronta para efetuar fluxos de login, renovação de token logout e etc.
 * Inicialização silênciosa do usuário com status já logado e com renovação dinâmica de Token, antes mesmo de qualquer código do programador executar.
 * Classe Guard que implementa a interface [CanActivete](https://angular.io/api/router/CanActivate) pronta para o sistema de [rotas do Angular](https://angular.io/guide/router).
@@ -72,21 +72,21 @@ A seguir os recursos abertos que podem ser utilizados com exemplos de como o mó
 Classe preparada para o processo de login, logout, renovação de token e etc. Veja os métodos a seguir:
 
 * **public static isLogged(): Token**<br>
-Este método verifica de modo sincrono se existe um usuário logado no momento, caso sim ele retorna um [Objeto Token](#-objeto-token).
+Este método verifica de modo sincrono se existe um usuário logado no momento, caso sim ele retorna um [Objeto Token](#objeto-token).
 
 * **public static logOut(): logOut**<br>
 Método que finaliza o a sessão logada, a injeções de token e o processo de verificação inicial de login bem como a renovação silênciosa do Token.
 
 * **public loginWithCredentials(_credentials: { email: string, password: string }): Observable<Token>** <br>
-Loga o usuário no servidor, baseado nas configurações do módulo e devolve um O[Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#-objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos email e password, ambos strings.
+Loga o usuário no servidor, baseado nas configurações do módulo e devolve um O[Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos email e password, ambos strings.
 
 * **public refreshToken(): Observable<Token>**<br>
-Executa a renovação do token que já está em memória, e devolve um [Observable](https://angular.io/guide/observables) com retorno do [Objeto Token](#-objeto-token) caso haja sucesso.<br><br>
-**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#-configuracao-do-modulo) estiverem desativados.*
+Executa a renovação do token que já está em memória, e devolve um [Observable](https://angular.io/guide/observables) com retorno do [Objeto Token](#objeto-token) caso haja sucesso.<br><br>
+**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuracao-do-modulo) estiverem desativados.*
 
 * **public checkLogged(): Observable<Token>** <br>
-Cria um fluxo assincrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localstorage, renova o token se preciso, e devolve um [Objeto Token](#-objeto-token) no caso de sucesso.<br><br>
-**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#-configuracao-do-modulo) estiverem desativados.*
+Cria um fluxo assincrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localstorage, renova o token se preciso, e devolve um [Objeto Token](#objeto-token) no caso de sucesso.<br><br>
+**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuracao-do-modulo) estiverem desativados.*
 
 * **public onRefreshTokenFail: EventEmitter<void>**<br>
 Propriedade que permite saber quando o processo de renovação de token deu erro e o usuário não está mais com sessão válida. Deve ser utilizado assinado um [Observable](https://angular.io/guide/observables).
