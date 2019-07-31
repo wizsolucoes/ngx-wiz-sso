@@ -1,6 +1,6 @@
 # NGX Wiz SSO
 
-Modulo feito para [Angular 4+](https://angular.io/) que têm por objetivo facilitar o processo de autenticação e renovação de token no SSO da Wiz.
+Modulo [Angular 4+](https://angular.io/) feito para facilitar processo de autenticação e renovação de token no SSO da Wiz.
 
 ## Dependências
 
@@ -10,14 +10,14 @@ Modulo feito para [Angular 4+](https://angular.io/) que têm por objetivo facili
 ## Recursos do módulo
 
 * Renovação automática(configurável) e silenciosa do token do usuário.
-* Injeção de Token automática nas requisições http, [mapeadas](#configuracao-do-modulo) na configuração.
+* Injeção de Token automática nas requisições http, [mapeadas](#configuração-do-módulo) na configuração.
 * Classe [Service Angular](https://angular.io/tutorial/toh-pt4) pronta para efetuar fluxos de login, renovação de token logout e etc.
 * Inicialização silênciosa do usuário com status já logado e com renovação dinâmica de Token, antes mesmo de qualquer código do programador executar.
 * Classe Guard que implementa a interface [CanActivete](https://angular.io/api/router/CanActivate) pronta para o sistema de [rotas do Angular](https://angular.io/guide/router).
 
 ## Instalação do módulo
 
-Para utilizar o módulo e seus recursos basta executar o seguinte comando na raiz do seu projeto Angular.
+Para instalar o módulo e seus recursos basta executar o seguinte comando na raiz do seu projeto Angular.
 
 ```bash
 npm install @wizsolucoes/ngx-wiz-sso --save
@@ -25,7 +25,7 @@ npm install @wizsolucoes/ngx-wiz-sso --save
 
 ## Configuração do módulo
 
-Antes de utilizar os recursos deste módulo é necessário realizar sua configuração no arquivo **app.module.ts** na pasta **app** do seu projeto.
+Antes de utilizar os recursos deste módulo será necessário realizar a seguinte configuração no arquivo **app.module.ts** do seu projeto.
 
 ```ts
 import { BrowserModule } from '@angular/platform-browser';
@@ -63,9 +63,11 @@ export class AppModule { }
 
 > Para entender melhor as demais configurações consulte a documentação do projeto [Vanilla Wiz SSO](https://github.com/wizsolucoes/vanilla-wiz-sso)
 
+> Um boa dica é utilizar os [enviroments do Angular](https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be) para ter essas configurações baseadas no modo de publicação.
+
 ## Utilização do projeto:
 
-A seguir os recursos abertos que podem ser utilizados com exemplos de como o módulo funciona.
+A seguir os recursos abertos que podem ser utilizados neste módulo:
 
 ### *Class SSOConectorService*
 
@@ -74,22 +76,22 @@ Classe preparada para o processo de login, logout, renovação de token e etc. V
 * **public static isLogged(): Token**<br>
 Este método verifica de modo sincrono se existe um usuário logado no momento, caso sim ele retorna um [Objeto Token](#objeto-token).
 
-* **public static logOut(): logOut**<br>
+* **public static logOut(): void**<br>
 Método que finaliza o a sessão logada, a injeções de token e o processo de verificação inicial de login bem como a renovação silênciosa do Token.
 
 * **public loginWithCredentials(_credentials: { email: string, password: string }): Observable<Token>** <br>
-Loga o usuário no servidor, baseado nas configurações do módulo e devolve um O[Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos email e password, ambos strings.
+Loga o usuário no servidor, baseado nas configurações do módulo e devolve um [Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos email e password, ambos strings.
 
-* **public refreshToken(): Observable<Token>**<br>
+* **public refreshToken(): Observable<Token>** ¹<br>
 Executa a renovação do token que já está em memória, e devolve um [Observable](https://angular.io/guide/observables) com retorno do [Objeto Token](#objeto-token) caso haja sucesso.<br><br>
-**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuracao-do-modulo) estiverem desativados.*
 
-* **public checkLogged(): Observable<Token>** <br>
+* **public checkLogged(): Observable<Token>** ¹<br>
 Cria um fluxo assincrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localstorage, renova o token se preciso, e devolve um [Objeto Token](#objeto-token) no caso de sucesso.<br><br>
-**Atenção:** *Este método faz parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuracao-do-modulo) estiverem desativados.*
 
 * **public onRefreshTokenFail: EventEmitter<void>**<br>
 Propriedade que permite saber quando o processo de renovação de token deu erro e o usuário não está mais com sessão válida. Deve ser utilizado assinado um [Observable](https://angular.io/guide/observables).
+
+> 1 - **Atenção:** *Estes métodos fazem parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuração-do-módulo) estiverem desativados.*
 
 #### Exemplo de uso da classe *SSOConectorService*:
 
@@ -136,7 +138,7 @@ export class AppComponent implements OnInit {
 
 ```
 
-> Importante: Nenhuma chamada via objeto HttpClient, cujo o dns não esteja listado na configuração do módulo será modificada como no exemplo.
+> Importante: Nenhuma chamada via objeto HttpClient, cuja à rota base não esteja listado na configuração do módulo, será modificada como no exemplo.
 
 #### Objeto Token
 
@@ -149,7 +151,7 @@ export interface Token {
 }
 ```
 
-### *class AuthGuard implements CanActivate*
+#### class AuthGuard implements CanActivate
 
 Um Guard é um recurso que consta do sistema de [rotas do Angular](https://angular.io/guide/router) e que permite restringir ou habilitar acesso a determina rota, veja o exemplo a seguir:
 
