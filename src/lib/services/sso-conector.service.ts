@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Inject } from '@angular/core';
-import SSOConector from 'vanilla-wiz-sso';
+import SSOConector from '@wizsolucoes/vanilla-wiz-sso';
 import { Observable, from } from 'rxjs';
 import { Token } from '../models/token';
 import { SSOConfig, _SSOConfig } from '../models/sso-config';

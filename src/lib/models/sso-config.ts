@@ -14,6 +14,7 @@ export class _SSOConfig {
 class SSOConfigOptions {
     public ssoTimeOut?: number = 60000;
     public tokenAutoRefresh?: boolean = true;
+    public loginRoute?: string = 'login';
 }
 
 export const SSOConfig = new InjectionToken<_SSOConfig>("SSOConfig");
