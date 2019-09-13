@@ -25,8 +25,8 @@ export class SSOConectorService {
     return this.sso.logOut();
   }
 
-  public loginWithCredentials(_credentials: { email: string, password: string }): Observable<Token> {
-    return <Observable<Token>> from(this.sso.loginWithCredentials(_credentials.email, _credentials.password));
+  public loginWithCredentials(_credentials: { userName: string, password: string }): Observable<Token> {
+    return <Observable<Token>> from(this.sso.loginWithCredentials(_credentials.userName, _credentials.password));
   }
 
   public refreshToken(): Observable<Token> {

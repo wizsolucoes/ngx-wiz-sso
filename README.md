@@ -80,8 +80,8 @@ Este método verifica de modo sincrono se existe um usuário logado no momento, 
 * **public static logOut(): void**<br>
 Método que finaliza o a sessão logada, a injeções de token e o processo de verificação inicial de login bem como a renovação silênciosa do Token.
 
-* **public loginWithCredentials(_credentials: { email: string, password: string }): Observable<Token>** <br>
-Loga o usuário no servidor, baseado nas configurações do módulo e devolve um [Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos email e password, ambos strings.
+* **public loginWithCredentials(_credentials: { userName: string, password: string }): Observable<Token>** <br>
+Loga o usuário no servidor, baseado nas configurações do módulo e devolve um [Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos userName e password, ambos strings.
 
 * **public refreshToken(): Observable<Token>** ¹<br>
 Executa a renovação do token que já está em memória, e devolve um [Observable](https://angular.io/guide/observables) com retorno do [Objeto Token](#objeto-token) caso haja sucesso.<br><br>
@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
 
     if (!SSOConectorService.isLogged()) {
       //Usuário deslogado, efetuar login atrávez de form, chamando o seguinte método
-      this.sso.loginWithCredentials({ email: 'user@user.com', password: '123456'});
+      this.sso.loginWithCredentials({ userName: 'user@user.com', password: '123456'});
     } else {
 
       // usuário já logado, ir para a tela de entrada
