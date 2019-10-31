@@ -89,8 +89,8 @@ Executa a renovação do token que já está em memória, e devolve um [Observab
 * **public checkLogged(): Observable<Token>** ¹<br>
 Cria um fluxo assincrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localstorage, renova o token se preciso, e devolve um [Objeto Token](#objeto-token) no caso de sucesso.<br><br>
 
-* **public onRefreshTokenFail: EventEmitter<void>**<br>
-Propriedade que permite saber quando o processo de renovação de token deu erro e o usuário não está mais com sessão válida. Deve ser utilizado assinado um [Observable](https://angular.io/guide/observables).
+* **public static readonly onRefreshTokenFail: EventEmitter<void>;**<br>
+Propriedade estática que permite saber quando o processo de renovação de token deu erro e o usuário não está mais com sessão válida. Deve ser utilizado assinado um [Observable](https://angular.io/guide/observables).
 
 > 1 - **Atenção:** *Estes métodos fazem parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuração-do-módulo) estiverem desativados.*
 
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit () {   
 
-    this.sso.onRefreshTokenFail.subscribe(
+    SSOConectorService.onRefreshTokenFail.subscribe(
         _ => {
         // Usuário deslogado por erro de renovação no token, enviar para a tela de login ou algo assim.
         }

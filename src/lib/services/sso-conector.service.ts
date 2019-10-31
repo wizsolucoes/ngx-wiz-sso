@@ -10,11 +10,14 @@ import { SSOConfig, _SSOConfig } from '../models/sso-config';
 export class SSOConectorService {
 
   private sso: SSOConector;
-  public onRefreshTokenFail: EventEmitter<void> = new EventEmitter();
+  public static readonly onRefreshTokenFail: EventEmitter<void> = new EventEmitter();
 
   constructor(@Inject(SSOConfig) config : _SSOConfig) {    
-    this.sso = new SSOConector(config);    
-    SSOConector.onAutoRefreshFail = () => this.onRefreshTokenFail.emit();
+    this.sso = new SSOConector(config);
+    SSOConector.onAutoRefreshFail = () => {
+      this.sso.logOut();
+      SSOConectorService.onRefreshTokenFail.emit()
+    };
   }
 
   public static isLogged(): Token {
