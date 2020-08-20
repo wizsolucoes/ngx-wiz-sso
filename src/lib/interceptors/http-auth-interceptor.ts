@@ -7,8 +7,9 @@ import {
 import { Observable } from 'rxjs';
 import { SSOConectorService } from '../services/sso-conector.service';
 import { SSOConfig, _SSOConfig } from '../models/sso-config';
-import { Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
+@Injectable()
 export class HttpAuthInterceptor implements HttpInterceptor {
 
     constructor(@Inject(SSOConfig) private config: _SSOConfig) {}

@@ -1,9 +1,10 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router  } from "@angular/router";
 import { Observable, config } from "rxjs";
 import { SSOConectorService } from "../services/sso-conector.service";
-import { Inject } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { SSOConfig, _SSOConfig } from "../models/sso-config";
 
+@Injectable()
 export class AuthGuard implements CanActivate {
 
     constructor(private router: Router, @Inject(SSOConfig) private config: _SSOConfig){}
