@@ -1,10 +1,12 @@
 # NGX Wiz SSO
 
-Modulo [Angular 4+](https://angular.io/) feito para facilitar processo de autenticação e renovação de token no SSO da Wiz.
+Modulo [Angular](https://angular.io/) feito para facilitar processo de autenticação e renovação de token no SSO da Wiz.
+
+Compatível com as [versões suportadas do Anuglar](https://angular.io/guide/releases#support-policy-and-schedule) (^8.0.0, ^9.0.0 e ^10.0.0) e otimizado para a versões ^10.0.0.
 
 ## Dependências
 
-* [Angular 4+](https://angular.io/)
+* [Angular](https://angular.io/)
 * [Vanilla Wiz SSO](https://github.com/wizsolucoes/vanilla-wiz-sso)
 
 ## Recursos do módulo
