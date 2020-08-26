@@ -26,6 +26,12 @@ stages:
             command: 'custom'
             verbose: false
             customCommand: 'run build'
+        - task: Npm@1
+          displayName: 'Build'
+          inputs:
+            command: 'custom'
+            verbose: false
+            customCommand: 'run test -- --no-watch --code-coverage --browsers=ChromeHeadless'
 - stage: Publish
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   dependsOn: [Build]
