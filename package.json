@@ -13,7 +13,9 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
-    "test": "ng test"
+    "test": "ng test",
+    "release:dry-run": "cd dist/ && npm publish --dry-run && cd ..",
+    "release": "cd dist/ && npm publish && cd .."
   },
   "dependencies": {
     "@wizsolucoes/vanilla-wiz-sso": "^1.0.0"

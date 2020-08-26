@@ -27,11 +27,17 @@ stages:
             verbose: false
             customCommand: 'run build'
         - task: Npm@1
-          displayName: 'Build'
+          displayName: 'Test'
           inputs:
             command: 'custom'
             verbose: false
             customCommand: 'run test -- --no-watch --code-coverage --browsers=ChromeHeadless'
+        - task: Npm@1
+          displayName: 'Publish: Dry run'
+          inputs:
+            command: 'custom'
+            verbose: false
+            customCommand: 'run release:dry-run'
 - stage: Publish
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   dependsOn: [Build]
@@ -51,8 +57,14 @@ stages:
             verbose: false
             customCommand: "run build"
         - task: Npm@1
-          displayName: "Publish"
+          displayName: 'Test'
           inputs:
-            command: "custom"
-            customCommand: "publish --prefix $(System.DefaultWorkingDirectory)/dist/ngx-wiz-sso/"
-            customEndpoint: "npmjs"
+            command: 'custom'
+            verbose: false
+            customCommand: 'run test -- --no-watch --code-coverage --browsers=ChromeHeadless'
+        - task: Npm@1
+          displayName: 'Publish'
+          inputs:
+            command: 'custom'
+            verbose: false
+            customCommand: 'run release'
