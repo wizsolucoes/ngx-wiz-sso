@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
-    "test": "karma start"
+    "test": "ng test"
   },
   "dependencies": {
     "@wizsolucoes/vanilla-wiz-sso": "^1.0.0"
