@@ -9,7 +9,7 @@ import { SSOConfig, _SSOConfig } from '../models/sso-config';
 })
 export class SSOConectorService {
 
-  private sso: SSOConector;
+  public readonly sso: SSOConector;
   public static readonly onRefreshTokenFail: EventEmitter<void> = new EventEmitter();
 
   constructor(@Inject(SSOConfig) config : _SSOConfig) {    
