@@ -68,3 +68,4 @@ stages:
             command: 'custom'
             verbose: false
             customCommand: 'run release'
+            customEndpoint: "npmjs"
