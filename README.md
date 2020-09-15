@@ -1,8 +1,23 @@
+<!-- omit in toc -->
 # NGX Wiz SSO
+
+- [Dependências](#dependências)
+- [Recursos do módulo](#recursos-do-módulo)
+- [Instalação do módulo](#instalação-do-módulo)
+- [Configuração do módulo](#configuração-do-módulo)
+- [Utilização do projeto:](#utilização-do-projeto)
+  - [*Class SSOConectorService*](#class-ssoconectorservice)
+    - [Exemplo de uso da classe *SSOConectorService*:](#exemplo-de-uso-da-classe-ssoconectorservice)
+    - [Objeto Token](#objeto-token)
+    - [class AuthGuard implements CanActivate](#class-authguard-implements-canactivate)
+- [Desenvolvimento](#desenvolvimento)
+  - [Testes](#testes)
+  - [Build](#build)
+  - [Publicação](#publicação)
 
 Modulo [Angular](https://angular.io/) feito para facilitar processo de autenticação e renovação de token no SSO da Wiz.
 
-Compatível com as [versões suportadas do Anuglar](https://angular.io/guide/releases#support-policy-and-schedule) (^8.0.0, ^9.0.0 e ^10.0.0) e otimizado para a versões ^10.0.0.
+Compatível com as [versões suportadas do Angular](https://angular.io/guide/releases#support-policy-and-schedule) (^8.0.0, ^9.0.0 e ^10.0.0) e otimizado para a versões ^10.0.0.
 
 ## Dependências
 
@@ -14,8 +29,8 @@ Compatível com as [versões suportadas do Anuglar](https://angular.io/guide/rel
 * Renovação automática(configurável) e silenciosa do token do usuário.
 * Injeção de Token automática nas requisições http, [mapeadas](#configuração-do-módulo) na configuração.
 * Classe [Service Angular](https://angular.io/tutorial/toh-pt4) pronta para efetuar fluxos de login, renovação de token logout e etc.
-* Inicialização silênciosa do usuário com status já logado e com renovação dinâmica de Token, antes mesmo de qualquer código do programador executar.
-* Classe Guard que implementa a interface [CanActivete](https://angular.io/api/router/CanActivate) pronta para o sistema de [rotas do Angular](https://angular.io/guide/router).
+* Inicialização silenciosa do usuário com status já logado e com renovação dinâmica de Token, antes mesmo de qualquer código do programador executar.
+* Classe Guard que implementa a interface [CanActivate](https://angular.io/api/router/CanActivate) pronta para o sistema de [rotas do Angular](https://angular.io/guide/router).
 
 ## Instalação do módulo
 
@@ -62,11 +77,11 @@ import { NgxWizSSOModule } from '@wizsolucoes/ngx-wiz-sso';
 export class AppModule { }
 ```
 
-* **authedPaths**, um array que deve conter as rotas que terão tokens injetados nas requisições utilizando o [httpclient do Angular](https://angular.io/guide/http). Exemplo *http://www.wizsolucoes.com.br* sem o final do endpoint exemplo 
+* **authedPaths**, um array que deve conter as rotas que terão tokens injetados nas requisições utilizando o [HttpClient do Angular](https://angular.io/guide/http). Exemplo *http://www.wizsolucoes.com.br* sem o final do endpoint exemplo 
 
 > Para entender melhor as demais configurações consulte a documentação do projeto [Vanilla Wiz SSO](https://github.com/wizsolucoes/vanilla-wiz-sso)
 
-> Um boa dica é utilizar os [enviroments do Angular](https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be) para ter essas configurações baseadas no modo de publicação.
+> Um boa dica é utilizar os [environments do Angular](https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be) para ter essas configurações baseadas no modo de publicação.
 
 ## Utilização do projeto:
 
@@ -77,10 +92,10 @@ A seguir os recursos abertos que podem ser utilizados neste módulo:
 Classe preparada para o processo de login, logout, renovação de token e etc. Veja os métodos a seguir:
 
 * **public static isLogged(): Token**<br>
-Este método verifica de modo sincrono se existe um usuário logado no momento, caso sim ele retorna um [Objeto Token](#objeto-token).
+Este método verifica de modo síncrono se existe um usuário logado no momento, caso sim ele retorna um [Objeto Token](#objeto-token).
 
 * **public static logOut(): void**<br>
-Método que finaliza o a sessão logada, a injeções de token e o processo de verificação inicial de login bem como a renovação silênciosa do Token.
+Método que finaliza o a sessão logada, a injeções de token e o processo de verificação inicial de login bem como a renovação silenciosa do Token.
 
 * **public loginWithCredentials(_credentials: { userName: string, password: string }): Observable<Token>** <br>
 Loga o usuário no servidor, baseado nas configurações do módulo e devolve um [Observable](https://angular.io/guide/observables) que contêm como retorno de sucesso um [Objeto Token](#objeto-token). Para executar este método é necessário fornecer um objeto dinâmico **_credentials** que consiste de um objeto js com os atributos userName e password, ambos strings.
@@ -89,12 +104,12 @@ Loga o usuário no servidor, baseado nas configurações do módulo e devolve um
 Executa a renovação do token que já está em memória, e devolve um [Observable](https://angular.io/guide/observables) com retorno do [Objeto Token](#objeto-token) caso haja sucesso.<br><br>
 
 * **public checkLogged(): Observable<Token>** ¹<br>
-Cria um fluxo assincrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localstorage, renova o token se preciso, e devolve um [Objeto Token](#objeto-token) no caso de sucesso.<br><br>
+Cria um fluxo assíncrono baseado em [Observable](https://angular.io/guide/observables) que verifica se existe token salvo no localStorage, renova o token se preciso, e devolve um [Objeto Token](#objeto-token) no caso de sucesso.<br><br>
 
 * **public static readonly onRefreshTokenFail: EventEmitter<void>;**<br>
 Propriedade estática que permite saber quando o processo de renovação de token deu erro e o usuário não está mais com sessão válida. Deve ser utilizado assinado um [Observable](https://angular.io/guide/observables).
 
-> 1 - **Atenção:** *Estes métodos fazem parte do core do módulo e somente deve ser chamado se os [recursos de autorenovação](#configuração-do-módulo) estiverem desativados.*
+> 1 - **Atenção:** *Estes métodos fazem parte do core do módulo e somente deve ser chamado se os [recursos de auto renovação](#configuração-do-módulo) estiverem desativados.*
 
 #### Exemplo de uso da classe *SSOConectorService*:
 
@@ -182,3 +197,31 @@ export class Gestao360RoutingModule { }
 ```
 
 No exemplo acima somente será possível acessar a rota *http://meu-site.com.br/gestao-360* se o usuário estiver logado no SSO.
+
+## Desenvolvimento
+### Testes
+```bash
+# Instalar dependências
+npm install
+
+# Executar testes
+npm test
+```
+
+### Build
+```bash
+# Gerar build da biblioteca na pasta dist/
+npm build
+```
+
+### Publicação
+```bash
+# Gerar build da biblioteca na pasta dist/
+npm build
+
+# Entrar na pasta do build
+cd dist
+
+# Publicar
+npm publish
+```
