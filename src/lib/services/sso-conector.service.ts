@@ -1,22 +1,22 @@
-import { Injectable, EventEmitter, Inject } from '@angular/core';
-import SSOConector from '@wizsolucoes/vanilla-wiz-sso';
-import { Observable, from } from 'rxjs';
-import { Token } from '../models/token';
-import { SSOConfig, _SSOConfig } from '../models/sso-config';
+import { Injectable, EventEmitter, Inject } from "@angular/core";
+import SSOConector from "@wizsolucoes/vanilla-wiz-sso";
+import { Observable, from } from "rxjs";
+import { Token } from "../models/token";
+import { SSOConfig, _SSOConfig } from "../models/sso-config";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class SSOConectorService {
+  public readonly sso: typeof SSOConector;
+  public static readonly onRefreshTokenFail: EventEmitter<void> =
+    new EventEmitter();
 
-  public readonly sso: SSOConector;
-  public static readonly onRefreshTokenFail: EventEmitter<void> = new EventEmitter();
-
-  constructor(@Inject(SSOConfig) config : _SSOConfig) {    
+  constructor(@Inject(SSOConfig) config: _SSOConfig) {
     this.sso = new SSOConector(config);
     SSOConector.onAutoRefreshFail = () => {
       this.sso.logOut();
-      SSOConectorService.onRefreshTokenFail.emit()
+      SSOConectorService.onRefreshTokenFail.emit();
     };
   }
 
@@ -28,27 +28,33 @@ export class SSOConectorService {
     return this.sso.logOut();
   }
 
-  public loginWithCredentials(_credentials: { userName: string, password: string }): Observable<Token> {
-    return <Observable<Token>> from(this.sso.loginWithCredentials(_credentials.userName, _credentials.password));
+  public loginWithCredentials(_credentials: {
+    userName: string;
+    password: string;
+  }): Observable<Token> {
+    return <Observable<Token>>(
+      from(
+        this.sso.loginWithCredentials(
+          _credentials.userName,
+          _credentials.password
+        )
+      )
+    );
   }
 
   public refreshToken(): Observable<Token> {
-    return <Observable<Token>> from(this.sso.refreshToken());
+    return <Observable<Token>>from(this.sso.refreshToken());
   }
 
   public checkLogged(): Observable<Token> {
-    
-    return <Observable<Token>> from(this.sso.isLogged());
+    return <Observable<Token>>from(this.sso.isLogged());
   }
-
 }
 
-export const init_app = (ssoConectorService: SSOConectorService)  => () => new Promise(
-  (resolve) => {
-    ssoConectorService.checkLogged()
-      .subscribe(
-        token => resolve(token),
-        _ => resolve()
-      );
-  }
-);
+export const init_app = (ssoConectorService: SSOConectorService) => () =>
+  new Promise((resolve) => {
+    ssoConectorService.checkLogged().subscribe(
+      (token) => resolve(token),
+      (_) => resolve()
+    );
+  });
