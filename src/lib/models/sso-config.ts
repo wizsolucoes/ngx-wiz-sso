@@ -7,6 +7,7 @@ export class _SSOConfig {
     public clientSecret: string;
     public scope: string;
     public authedPaths: string[];
+    public apiSubscription?: string;
     public options?: SSOConfigOptions;
 }
 
