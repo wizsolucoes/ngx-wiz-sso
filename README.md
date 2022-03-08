@@ -49,6 +49,7 @@ import { NgxWizSSOModule } from '@wizsolucoes/ngx-wiz-sso';
       grantType: "<<Grant Type>>",
       authedPaths: ["<<dns a ser autenticado>>"],
       scope: "<<scope do projeto>>",
+      apiSubscription: "<<chave da assinatura da api>>" //parâmetro opcional
       options: { //parâmetro opcional
         ssoTimeOut: 60000, //parâmetro opcional, determina o timeout para o SSO
         tokenAutoRefresh: true, //parâmetro opcional, determina se o token deve ser renovado
