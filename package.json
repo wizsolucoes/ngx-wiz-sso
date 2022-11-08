@@ -21,7 +21,7 @@
     "@wizsolucoes/vanilla-wiz-sso": "^1.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1000.7",
+    "@angular-devkit/build-angular": "^14.2.8",
     "@angular-devkit/build-ng-packagr": "~0.1000.7",
     "@angular/cli": "^10.0.7",
     "@angular/common": "^10.0.11",
